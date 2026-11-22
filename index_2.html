@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mid9ht coffee – kawa w Warszawie</title>
+
+  <!-- Шрифт из Google Fonts. Если интернета нет, браузер возьмёт обычный sans-serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- Второй шрифт, Marck Script, каллиграфический, поддерживает русские буквы -->
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700;800&family=Marck+Script&display=swap" rel="stylesheet">
+
+  <style>
+    /* ЦВЕТА: поменяй любой, и изменится весь сайт */
+    :root {
+      --fon: #81D8D0;        /* фон страницы (цвет Тиффани) */
+      --tekst: #1B2B27;      /* основной текст */
+      --akcent: #FF6FB5;     /* цвет кнопок (розовый) */
+      --tyomny: #12201C;     /* тёмный блок */
+    }
+
+    * { box-sizing: border-box; margin: 0; }
+
+    body {
+      font-family: "Bricolage Grotesque", sans-serif;
+      background: var(--fon);
+      color: var(--tekst);
+      line-height: 1.6;
+    }
+
+    /* ШАПКА: главный экран */
+    header {
+      padding: 80px 24px 60px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    header h1 {
+      font-size: clamp(2.8rem, 9vw, 5.5rem); /* размер сам подстраивается под экран */
+      font-weight: 800;
+      line-height: 1;
+      display: inline-block;
+      transform: skewX(-8deg);        /* наклон названия вправо: увеличь число для большего наклона */
+      transform-origin: left bottom;
+    }
+    /* ПОДПИСЬ под названием */
+    .podpis {
+      font-family: "Marck Script", cursive;
+      font-size: 2rem;
+      margin-top: 8px;
+    }
+    header p {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      max-width: 460px;
+    }
+
+    /* КНОПКА */
+    button {
+      margin-top: 28px;
+      padding: 14px 28px;
+      font: inherit;
+      font-weight: 700;
+      background: var(--akcent);
+      color: var(--tyomny);
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    button:hover { filter: brightness(1.08); }
+    button:focus-visible { outline: 3px solid var(--tyomny); outline-offset: 3px; }
+
+    /* ОКОШКО С АКЦИЕЙ */
+    .akciya {
+      background: var(--tyomny);
+      color: var(--fon);
+      border: 3px solid var(--akcent);
+      border-radius: 20px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+    .akciya h3 { font-size: 1.4rem; color: var(--akcent); }
+    .akciya p { margin-top: 6px; font-size: 1.1rem; }
+    .akciya .cena { font-weight: 800; font-size: 1.6rem; margin-top: 10px; }
+
+    /* МЕНЮ */
+    main { max-width: 760px; margin: 0 auto; padding: 0 24px 60px; }
+    h2 { font-size: 1.8rem; margin-bottom: 16px; }
+    ul { list-style: none; padding: 0; }
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(27, 43, 39, 0.2);
+      font-size: 1.1rem;
+    }
+
+    /* ТЁМНЫЙ БЛОК: адрес и часы */
+    footer {
+      background: var(--tyomny);
+      color: var(--fon);
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    /* СЕРДЕЧКО С ЛАЙКАМИ */
+    .pravo { display: flex; align-items: center; gap: 14px; }
+    .serdce {
+      margin: 0;
+      padding: 4px 12px;
+      background: transparent;
+      color: var(--tekst);
+      border: 2px solid var(--tekst);
+      font-size: 1rem;
+    }
+    .serdce.liked { background: var(--akcent); border-color: var(--akcent); color: var(--tyomny); }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>mid9ht coffee</h1>
+    <div class="podpis">На ночь-можно!</div>
+    <p>Свежая обжарка каждое утро. Маленькая кофейня на углу, где всегда пахнет кофе.</p>
+
+    <!-- Кнопка вызывает функцию из скрипта внизу -->
+    <button id="knopka">Заказать столик</button>
+  </header>
+
+  <main>
+    <!-- АКЦИЯ: меняй текст и цену здесь -->
+    <section class="akciya">
+      <h3>Акция по понедельникам</h3>
+      <p>Капучино и круассан в наборе</p>
+      <p class="cena">20 zł</p>
+    </section>
+
+    <h2>Меню</h2>
+    <ul>
+      <li><span>Эспрессо</span><span class="pravo"><span>9 zł</span><button class="serdce" data-id="espresso" aria-label="Поставить лайк: Эспрессо"><span class="ikona">♡</span> <span class="schet">0</span></button></span></li>
+      <li><span>Флэт уайт</span><span class="pravo"><span>16 zł</span><button class="serdce" data-id="flatwhite" aria-label="Поставить лайк: Флэт уайт"><span class="ikona">♡</span> <span class="schet">0</span></button></span></li>
+      <li><span>Капучино</span><span class="pravo"><span>15 zł</span><button class="serdce" data-id="cappuccino" aria-label="Поставить лайк: Капучино"><span class="ikona">♡</span> <span class="schet">0</span></button></span></li>
+      <li><span>Колд брю</span><span class="pravo"><span>18 zł</span><button class="serdce" data-id="coldbrew" aria-label="Поставить лайк: Колд брю"><span class="ikona">♡</span> <span class="schet">0</span></button></span></li>
+      <li><span>Тыквенный латте</span><span class="pravo"><span>19 zł</span><button class="serdce" data-id="pumpkin" aria-label="Поставить лайк: Тыквенный латте"><span class="ikona">♡</span> <span class="schet">0</span></button></span></li>
+      <li><span>Эспрессо тоник</span><span class="pravo"><span>17 zł</span><button class="serdce" data-id="espressotonic" aria-label="Поставить лайк: Эспрессо тоник"><span class="ikona">♡</span> <span class="schet">0</span></button></span></li>
+      <li><span>Круассан с миндалём</span><span class="pravo"><span>12 zł</span><button class="serdce" data-id="croissant" aria-label="Поставить лайк: Круассан с миндалём"><span class="ikona">♡</span> <span class="schet">0</span></button></span></li>
+    </ul>
+  </main>
+
+  <footer>
+    <p>ul. Przykładowa 12, Warszawa</p>
+    <p>Пн–Пт 7:30–19:00, Сб–Вс 9:00–17:00</p>
+    <p id="polosa" style="opacity:.7; font-size:.9rem; margin-top:14px;"></p>
+  </footer>
+
+  <script>
+    // JAVASCRIPT: что происходит при нажатии на кнопку
+    const knopka = document.getElementById("knopka");
+
+    knopka.addEventListener("click", function () {
+      knopka.textContent = "Столик за вами! Ждём вас";
+    });
+
+    // ===== ЛАЙКИ =====
+    // Пока тут null, лайки работают в "демо-режиме": видны только в твоём браузере.
+    // Чтобы лайки стали настоящими и общими, сюда вставляется конфиг Firebase.
+    const FIREBASE_CONFIG = {
+      apiKey: "AIzaSyB1PdpmpaZMlFQ9V3DEfH7WwgP4_mEjYus",
+      authDomain: "tiffani-b7732.firebaseapp.com",
+      projectId: "tiffani-b7732",
+      storageBucket: "tiffani-b7732.firebasestorage.app",
+      messagingSenderId: "54896144911",
+      appId: "1:54896144911:web:1b3138f13a48c6d0f1e97a",
+      measurementId: "G-N562MY2QYB"
+    };
+
+    // Показываем внизу страницы, в каком режиме работают лайки
+    const polosa = document.getElementById("polosa");
+    function pokazat(tekst) { polosa.textContent = tekst; }
+
+    let schetchiki = {};   // сколько лайков у каждой позиции
+    let moi = {};          // что лайкнул именно этот человек
+    let otpravit = null;   // функция отправки в базу (появится при подключении Firebase)
+
+    // Читаем из памяти браузера (в try, чтобы страница не ломалась, если память недоступна)
+    try { moi = JSON.parse(localStorage.getItem("moi_laiki") || "{}"); } catch (e) {}
+    if (!FIREBASE_CONFIG) {
+      try { schetchiki = JSON.parse(localStorage.getItem("demo_schetchiki") || "{}"); } catch (e) {}
+    }
+
+    // Рисуем сердечки и цифры на странице
+    function risuem() {
+      document.querySelectorAll(".serdce").forEach(function (kn) {
+        const id = kn.dataset.id;
+        kn.querySelector(".schet").textContent = schetchiki[id] || 0;
+        kn.querySelector(".ikona").textContent = moi[id] ? "♥" : "♡";
+        kn.classList.toggle("liked", !!moi[id]);
+      });
+    }
+
+    // Нажатие на сердечко: поставить или снять лайк
+    document.querySelectorAll(".serdce").forEach(function (kn) {
+      kn.addEventListener("click", function () {
+        const id = kn.dataset.id;
+        const izmenenie = moi[id] ? -1 : 1;
+        moi[id] = !moi[id];
+        try { localStorage.setItem("moi_laiki", JSON.stringify(moi)); } catch (e) {}
+        if (otpravit) {
+          otpravit(id, izmenenie).catch(function (e) {   // настоящий режим: уходит в базу
+            console.error(e);
+            pokazat("Не удалось сохранить лайк: " + (e.code || e.message));
+          });
+        } else {
+          schetchiki[id] = Math.max(0, (schetchiki[id] || 0) + izmenenie);   // демо-режим
+          try { localStorage.setItem("demo_schetchiki", JSON.stringify(schetchiki)); } catch (e) {}
+        }
+        risuem();
+      });
+    });
+
+    // Подключение Firebase (запускается, только если ты вставила конфиг)
+    async function podklyuchit() {
+      const app = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+      const fs = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+      const baza = fs.getFirestore(app.initializeApp(FIREBASE_CONFIG));
+      // Слушаем базу: когда кто-то лайкает, цифры обновляются у всех сразу
+      fs.onSnapshot(fs.collection(baza, "laiki"), function (snap) {
+        schetchiki = {};
+        snap.forEach(function (d) { schetchiki[d.id] = d.data().n || 0; });
+        risuem();
+        pokazat("Лайки: общая база подключена");
+      }, function (e) {
+        console.error(e);
+        pokazat("Ошибка базы: " + (e.code || e.message));
+      });
+      otpravit = function (id, izmenenie) {
+        return fs.setDoc(fs.doc(baza, "laiki", id), { n: fs.increment(izmenenie) }, { merge: true });
+      };
+    }
+
+    risuem();
+    if (FIREBASE_CONFIG) {
+      pokazat("Лайки: подключаемся к базе...");
+      podklyuchit().catch(function (e) {
+        console.error(e);
+        pokazat("Ошибка подключения к базе: " + e.message);
+      });
+    } else {
+      pokazat("Лайки: демо-режим (видны только у тебя)");
+    }
+  </script>
+</body>
+</html>
